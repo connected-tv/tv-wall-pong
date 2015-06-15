@@ -1,0 +1,18 @@
+<h1>Project Credits</h1>
+
+<octo-credits data-user="johnbeech" data-repo="tv-wall-pong"></octo-credits>
+
+<template tagName="octo-credits" data-source-template="/api/octoCredits/{{data-user}}/{{data-repo}}" refresh-time="300">
+  <p>Credits for <b>{{data-user}}</b>/<b>{{data-repo}}</b> : </p>
+  <p>
+  {{#each data}}
+    <a href="{{html_url}}">
+      <button class="btn btn-primary">
+        <img src="{{avatar}}" alt="{{name}}" style="max-height: 30px;" />
+        {{name}}
+        <span class="badge">{{commits}}</span>
+      </button>
+    </a>
+  {{/each}}
+  </p>
+</template>
