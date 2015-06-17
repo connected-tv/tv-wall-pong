@@ -1,6 +1,6 @@
 var monitor = require('product-monitor');
 
-var serverPort = process.env.TV_WALL_PONG_SERVER_PORT || 9000;
+var serverPort = process.env.TV_WALL_PONG_SERVER_PORT || 80;
 
 var server = monitor({
   "productInformation": {
