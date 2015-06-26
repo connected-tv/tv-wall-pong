@@ -25,6 +25,6 @@
   "dependencies": {
     "express": "^4.12.4",
     "handlebars": "^3.0.3",
-    "product-monitor": "~1.7.0"
+    "product-monitor": "^1.7.2"
   }
 }
