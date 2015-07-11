@@ -5,3 +5,28 @@
   <p>This server indicates that TV Wall Pong is up and running, and lets you monitor and view the current configuration.</p>
 
 </jumbotron>
+
+<h2>Endpoint Status</h2>
+<status-checker data-url="/api/client/:id/tv-config.js">TV Config Endpoint</status-checker>
+<get data-source-url="/api/client/:id/tv-config.js"></get>
+
+<status-checker data-url="/api/client/:id/tv-pong.js">Game Client Endpoint</status-checker>
+<get data-source-url="/api/client/:id/tv-pong.js"></get>
+
+<template for="get">
+  <markdown>
+```js
+{{jsonString}}
+```
+  </markdown>
+</template>
+
+<script for="get" type="text/javascript">
+$(function() {
+  var GetComponent = Component.configure('get');
+
+  GetComponent.on('preRenderStep', function(instance) {
+    instance.jsonString = JSON.stringify(instance.data);
+  });
+});
+</script>
