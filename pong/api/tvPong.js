@@ -26,7 +26,7 @@ instance.render = function(req, res) {
             id: clientId
         }
     };
-    res.send(data);
+    res.jsonp(data);
 }
 
 module.exports = instance;
