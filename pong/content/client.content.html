@@ -1,0 +1,26 @@
+<h1>Client goes here</h1>
+
+<client data-source-url="/api/client/:id/tv-pong.js" refresh-time="2"></client>
+
+<script for="client" type="text/javascript">
+$(function() {
+  var ClientComponent = Component.configure('client');
+
+  ClientComponent.on('preRenderStep', function(instance) {
+    instance.jsonString = JSON.stringify(instance.data);
+  });
+});
+</script>
+
+<template for="client">
+  {{#each visibleItems}}
+   <div class="visibleItem" style="top: {{y}}px; left: {{x}}px; width: {{width}}px; height: {{height}}px; background-image: url('{{image}}'); border: 2px solid black;">{{name}}</div>
+  {{/each}}
+  <pre>{{jsonString}}</pre>
+</template>
+
+<style for="client">
+client > div.visibleItem {
+  position: absolute;
+}
+</style>
