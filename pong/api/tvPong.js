@@ -1,5 +1,7 @@
 var instance = {};
 
+instance.cacheDuration = "1 second";
+
 instance.route = '/api/client/:id/tv-pong.js';
 
 instance.configure = function(config) {
@@ -12,14 +14,14 @@ instance.render = function(req, res) {
     var data = {
         visibleItems: [{
             name: 'ball',
-            x: 0,
-            y: 0,
+            x: Math.floor(Math.random() * 400),
+            y: Math.floor(Math.random() * 400),
             width: '10',
             height: '10',
             image: '/images/ball.png',
             velocity: {
-                x: -10,
-                y: 10
+                x: Math.floor(Math.random() * 51) - 25,
+                y: Math.floor(Math.random() * 51) - 25,
             }
         }],
         client: {
