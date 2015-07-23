@@ -4,7 +4,7 @@ instance.cacheDuration = "1 second";
 
 instance.route = '/api/client/:id/tv-pong.js';
 
-var visibleItems = [{
+var ball = {
   name: 'ball',
   x: Math.floor(Math.random() * 400),
   y: Math.floor(Math.random() * 400),
@@ -16,7 +16,14 @@ var visibleItems = [{
     x: Math.floor(Math.random() * 51) - 25,
     y: Math.floor(Math.random() * 51) - 25,
   }
-}];
+};
+
+var visibleItems = [ball];
+
+var game = {
+  width: 800,
+  height: 500
+}
 
 instance.configure = function(config) {
 
@@ -25,15 +32,14 @@ instance.configure = function(config) {
 instance.render = function(req, res) {
   var clientId = req.params.id || false;
 
-  var ball = visibleItems[0];
-
   boundBallPosition(ball);
 
   var data = {
     visibleItems: visibleItems,
     client: {
       id: clientId
-    }
+    },
+    game: game
   };
   res.jsonp(data);
 }
@@ -49,10 +55,12 @@ function boundBallPosition(ball) {
 }
 
 function boundBallAxis(ball, axis, t_diff) {
+  var limit = (axis === 'x') ? game.width : game.height;
+
   ball[axis] = ball[axis] + ball.velocity[axis] * t_diff;
-  while (ball[axis] > 500 || ball[axis] < 0) {
-    if (ball[axis] > 500) {
-      ball[axis] = 2 * 500 - ball[axis];
+  while (ball[axis] > limit || ball[axis] < 0) {
+    if (ball[axis] > limit) {
+      ball[axis] = 2 * limit - ball[axis];
     } else {
       ball[axis] = -ball[axis];
     }
