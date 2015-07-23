@@ -12,6 +12,6 @@ var server = monitor({
 }, ready);
 
 function ready(instance) {
-  instance.server.use('/public', express.static(process.cwd() + '/public'));
+  instance.server.use('/', express.static(process.cwd() + '/public'));
   instance.listen();
 }

@@ -8,8 +8,8 @@ var ball = {
   name: 'ball',
   x: Math.floor(Math.random() * 400),
   y: Math.floor(Math.random() * 400),
-  width: '10',
-  height: '10',
+  width: '20',
+  height: '20',
   image: '/images/ball.png',
   timestamp: Date.now(),
   velocity: {

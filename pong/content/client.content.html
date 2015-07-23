@@ -1,26 +1,88 @@
-<h1>Client goes here</h1>
+<h1>overview goes here</h1>
 
-<client data-source-url="/api/client/:id/tv-pong.js" refresh-time="2"></client>
+<overview data-source-url="/api/client/:id/tv-pong.js" refresh-time="2"></overview>
 
-<script for="client" type="text/javascript">
+<script for="overview" type="text/javascript">
 $(function() {
-  var ClientComponent = Component.configure('client');
+  var overviewComponent = Component.configure('overview');
 
-  ClientComponent.on('preRenderStep', function(instance) {
+  var timeout;
+  var game;
+  var ball;
+
+  overviewComponent.on('preRenderStep', function(instance) {
     instance.jsonString = JSON.stringify(instance.data);
+
+    clearTimeout(timeout);
+    timeout = setTimeout(overviewComponent.updatePositions, 100, instance);
   });
+
+  overviewComponent.updatePositions = function(instance) {
+    game = instance.game;
+    ball = instance.visibleItems[0];
+
+    boundBallPosition(ball);
+
+    instance.data.visibleItems.forEach(function(item) {
+      // optionally do things to each visible item
+    });
+    instance.render();
+
+    clearTimeout(timeout);
+    timeout = setTimeout(overviewComponent.updatePositions, 100, instance);
+  }
+
+  function boundBallPosition(ball) {
+    var t_now = Date.now();
+    var t_diff = (t_now - ball.timestamp) / 1000;
+
+    boundBallAxis(ball, 'x', t_diff);
+    boundBallAxis(ball, 'y', t_diff);
+
+    ball.timestamp = t_now;
+  }
+
+  function boundBallAxis(ball, axis, t_diff) {
+    var limit = (axis === 'x') ? game.width : game.height;
+
+    ball[axis] = ball[axis] + ball.velocity[axis] * t_diff;
+    while (ball[axis] > limit || ball[axis] < 0) {
+      if (ball[axis] > limit) {
+        ball[axis] = 2 * limit - ball[axis];
+      } else {
+        ball[axis] = -ball[axis];
+      }
+      ball.velocity[axis] = -ball.velocity[axis];
+    }
+  }
 });
 </script>
 
-<template for="client">
-  {{#each visibleItems}}
-   <div class="visibleItem" style="top: {{y}}px; left: {{x}}px; width: {{width}}px; height: {{height}}px; background-image: url('{{image}}'); border: 2px solid black;">{{name}}</div>
-  {{/each}}
+<template for="overview">
+  <game style="width: {{game.width}}px; height: {{game.height}}px;">
+    {{#each visibleItems}}
+     <visibleItem style="top: {{y}}px; left: {{x}}px; width: {{width}}px; height: {{height}}px; background-image: url('{{image}}'); border: 2px solid black;">
+       <label>{{name}}</label>
+     </visibleItem>
+    {{/each}}
+  </game>
   <pre>{{jsonString}}</pre>
 </template>
 
-<style for="client">
-client > div.visibleItem {
+<style for="overview">
+overview > game {
+  display: block;
+  position: relative;
+  background: #EEE;
+  border: 3px solid black;
+}
+overview > game > visibleItem {
+  display: block;
   position: absolute;
+}
+overview > game > visibleItem > label {
+  display: block;
+  position: absolute;
+  bottom: 10px;
 }
 </style>
