@@ -15,10 +15,38 @@ var ball = {
   velocity: {
     x: (Math.floor(Math.random() * 1) - 0.5) * 200,
     y: (Math.floor(Math.random() * 1) - 0.5) * 200,
-  }
+  },
 };
 
-var visibleItems = [ball];
+var client1 = {
+  x: 50,
+  y: 50,
+  width: 200,
+  height: 150
+};
+
+var client2 = {
+  x: 350,
+  y: 80,
+  width: 300,
+  height: 180
+};
+
+var client3 = {
+  x: 250,
+  y: 150,
+  width: 250,
+  height: 160
+};
+
+var client4 = {
+  x: 450,
+  y: 350,
+  width: 220,
+  height: 180
+};
+
+var visibleItems = [ball, client1, client2, client3, client4];
 
 var game = {
   width: 800,
