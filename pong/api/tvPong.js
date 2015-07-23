@@ -2,7 +2,7 @@ var instance = {};
 
 instance.cacheDuration = "1 second";
 
-instance.route = '/api/client/:id/tv-pong.js';
+instance.route = '/api/client/:id/:tv-pong.js';
 
 var ball = {
   name: 'ball',
@@ -13,8 +13,8 @@ var ball = {
   image: '/images/ball.png',
   timestamp: Date.now(),
   velocity: {
-    x: Math.floor(Math.random() * 51) - 25,
-    y: Math.floor(Math.random() * 51) - 25,
+    x: (Math.floor(Math.random() * 1) - 0.5) * 200,
+    y: (Math.floor(Math.random() * 1) - 0.5) * 200,
   }
 };
 

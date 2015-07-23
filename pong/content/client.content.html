@@ -9,12 +9,13 @@ $(function() {
   var timeout;
   var game;
   var ball;
+  var fps = 1000/60;
 
   overviewComponent.on('preRenderStep', function(instance) {
     instance.jsonString = JSON.stringify(instance.data);
 
     clearTimeout(timeout);
-    timeout = setTimeout(overviewComponent.updatePositions, 100, instance);
+    timeout = setTimeout(overviewComponent.updatePositions, fps, instance);
   });
 
   overviewComponent.updatePositions = function(instance) {
@@ -29,7 +30,7 @@ $(function() {
     instance.render();
 
     clearTimeout(timeout);
-    timeout = setTimeout(overviewComponent.updatePositions, 100, instance);
+    timeout = setTimeout(overviewComponent.updatePositions, fps, instance);
   }
 
   function boundBallPosition(ball) {
