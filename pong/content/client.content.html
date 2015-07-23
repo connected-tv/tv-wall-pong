@@ -44,7 +44,7 @@ $(function() {
   }
 
   function boundBallAxis(ball, axis, t_diff) {
-    var limit = (axis === 'x') ? game.width : game.height;
+    var limit = (axis === 'x') ? game.width - ball.width : game.height - ball.height;
 
     ball[axis] = ball[axis] + ball.velocity[axis] * t_diff;
     while (ball[axis] > limit || ball[axis] < 0) {
@@ -62,7 +62,7 @@ $(function() {
 <template for="overview">
   <game style="width: {{game.width}}px; height: {{game.height}}px;">
     {{#each visibleItems}}
-     <visibleItem style="top: {{y}}px; left: {{x}}px; width: {{width}}px; height: {{height}}px; background-image: url('{{image}}'); border: 2px solid black;">
+     <visibleItem style="top: {{y}}px; left: {{x}}px; width: {{width}}px; height: {{height}}px; background-image: url('{{image}}');">
        <label>{{name}}</label>
      </visibleItem>
     {{/each}}
@@ -75,15 +75,14 @@ overview > game {
   display: block;
   position: relative;
   background: #EEE;
-  border: 3px solid black;
+  outline: 3px solid black;
 }
 overview > game > visibleItem {
   display: block;
   position: absolute;
+  outline: 1px solid black;
 }
 overview > game > visibleItem > label {
-  display: block;
-  position: absolute;
-  bottom: 10px;
+  display: none;
 }
 </style>

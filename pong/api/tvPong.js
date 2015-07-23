@@ -55,7 +55,7 @@ function boundBallPosition(ball) {
 }
 
 function boundBallAxis(ball, axis, t_diff) {
-  var limit = (axis === 'x') ? game.width : game.height;
+  var limit = (axis === 'x') ? game.width - ball.width : game.height - ball.height;
 
   ball[axis] = ball[axis] + ball.velocity[axis] * t_diff;
   while (ball[axis] > limit || ball[axis] < 0) {
