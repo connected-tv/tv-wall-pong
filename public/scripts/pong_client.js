@@ -2,7 +2,6 @@ function PongGame(pong_server, parent_box) {
   ball_div = document.createElement('div');
   ball_div.style.position = 'absolute';
   ball_img = document.createElement('img');
-  ball_img.setAttribute('src', 'static/img/ball.png');
   ball_img.style.width = '20px';
   ball_img.style.height = '20px';
   ball = {
