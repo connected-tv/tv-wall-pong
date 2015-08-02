@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/johnbeech/tv-wall-pong",
   "dependencies": {
-    "express": "^4.13.1",
+    "express": "^4.13.2",
     "handlebars": "^3.0.3",
-    "product-monitor": "^1.8.26"
+    "product-monitor": "^1.8.27"
   }
 }
